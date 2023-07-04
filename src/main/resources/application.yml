@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: clevertap_scripts
+
+clevertap:
+  api:
+    url: ${CLEVERTAP_API_URL:https://api.clevertap.com}
+    user: ${CLEVERTAP_API_ACCOUNT_ID}
+    password: ${CLEVERTAP_API_PASSCODE}
