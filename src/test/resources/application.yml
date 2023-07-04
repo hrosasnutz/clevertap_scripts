@@ -8,7 +8,9 @@ clevertap:
     user: ${CLEVERTAP_API_ACCOUNT_ID}
     password: ${CLEVERTAP_API_PASSCODE}
   csv:
-    profiles: classpath:csv/thin_profiles.csv
+    profiles:
+      v1: classpath:csv/v1/profiles_batch_7.csv
+      v2: classpath:csv/v2/thin_profiles.csv
 
 logging:
   file:

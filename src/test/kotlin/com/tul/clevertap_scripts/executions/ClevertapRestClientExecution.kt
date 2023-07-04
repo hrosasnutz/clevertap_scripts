@@ -2,10 +2,12 @@ package com.tul.clevertap_scripts.executions
 
 import com.tul.clevertap_scripts.ClevertapScriptsApplicationTests
 import com.tul.clevertap_scripts.client.ClevertapRestClient
+import com.tul.clevertap_scripts.util.Util
 import mu.KotlinLogging
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import java.util.UUID
 
 internal class ClevertapRestClientExecution : ClevertapScriptsApplicationTests() {
     
@@ -32,5 +34,19 @@ internal class ClevertapRestClientExecution : ClevertapScriptsApplicationTests()
         )
         val result = client.demergeProfile(profiles)
         log.info { "results: $result" }
+    }
+
+    @Test
+    @Disabled
+    fun testValidIdentify() {
+        listOf(
+            "15457",
+            "co-15457",
+            "${UUID.randomUUID()}",
+            "er-${UUID.randomUUID()}",
+            "co-${UUID.randomUUID()}"
+        ).forEach {
+            log.info { "identity: $it is valid? ${Util.isValidIdentity(it)}" }
+        }
     }
 }
