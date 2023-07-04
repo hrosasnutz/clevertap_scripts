@@ -1,7 +1,6 @@
-"Gender","Identity","CleverTap Id"
-"Male","2487,co-2487,9962f3a0-b0e0-4184-9573-0aefd467c2a1","__g3b8fee4d8c624cc1a1accaa42b214590"
-"Male","ec-530","__g3b8fee4d8c624cc1a1accaa42b214590"
-"Others","co-4b24701a-72e6-4a5f-a6fd-15886e5277b1","__g3b8fee4d8c624cc1a1accaa42b214590"
-"Others","br-4b24701a-72e6-4a5f-a6fd-15886e5277b1",""
-"Unknown","","__g3b8fee4d8c624cc1a1accaa42b214590"
-"Unknown","",""
+"Gender","Identity","CleverTap Id","Device","Mobile Token",
+"Male","","__gcc8903eb43e4465c91b1fc990e658234","Android","",
+"Male","mx-11fea034-7b52-4144-853c-9df8067f5e5a","mx-11fea034-7b52-4144-853c-9df8067f5e5a","Web","",
+"Female","mx-2266,mx-a4f18385-29b1-4405-8796-ae5e29fb96a2,mx-15a5b643-bf9c-483c-a2be-4cc7fabf2c5a,mx-98173ce4-1534-497e-9dc2-49baeb2036c4,mx-5eea2fd7-7fac-4f34-ad2e-74a2520a2de7","yQ9SvqhCJJ6Z_S4iRJDfIAYGSGytfo-U","Web","",
+"Unknown","ec-7008","-g6660b7ce693149059696d94de81da0c3","iOS","ccmlidgby0witqof0msrzf:apa91be6ye_kwpjhoruyecgrae1t7sdf4cpg358egw8zpqtjct32zhlnezpgrrbfrmfnhxzlqj1gubfh5ehcn6ugboz0g0bygno7fran1om_qwg6uzndphziyw5r48rmv2kj6mtid9om",
+"Unknown","","","Android","",

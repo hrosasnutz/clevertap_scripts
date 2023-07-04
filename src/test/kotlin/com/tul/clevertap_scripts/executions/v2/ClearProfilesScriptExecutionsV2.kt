@@ -30,34 +30,40 @@ class ClearProfilesScriptExecutionsV2 : ClevertapScriptsApplicationTests() {
     
     @Test
     fun executeClearProfiles() {
-        csvReader { autoRenameDuplicateHeaders = true }.readAllWithHeader(file.inputStream)
-            .mapNotNull { it.filterKeys { k -> k in FILTER_ROWS } }
-            .filter { it.isNotEmpty() }
-            .forEach {
-                val identity = it["Identity"] ?: ""
-                val clevertapId = it["CleverTap Id"] ?: ""
-                if (identity.isEmpty()) {
-                    if (clevertapId.isEmpty()) {
-                        log.info { "preserve profile: $it" }
-                    } else {
-                        val status = client.deleteProfile(listOf(clevertapId), "guid")
-                        log.info { "delete profile: $it -> status: $status" }
-                        TimeUnit.SECONDS.sleep(1)
-                    }
-                } else {
-                    if (identity.contains(",")) {
-                        val profiles = identity.split(",").mapNotNull { s -> s.trim() }
-                        val status = client.demergeProfile(profiles)
-                        log.info { "demerge profiles: $it -> status: $status" }
-                        TimeUnit.SECONDS.sleep(1)
-                    } else if(!Util.isValidIdentity(identity)) {
-                        val status = client.deleteProfile(listOf(identity))
-                        log.info { "delete profile: $it -> status: $status" }
-                        TimeUnit.SECONDS.sleep(1)
-                    } else {
-                        log.info { "preserve profile: $it" }
-                    }
+        csvReader { autoRenameDuplicateHeaders = true }.open(file.inputStream) {
+            readAllWithHeaderAsSequence()
+                .mapNotNull { it.filterKeys { k -> k in FILTER_ROWS } }
+                .filter { it.isNotEmpty() }
+                .forEach {
+                    processRow(it)
                 }
+        }
+    }
+
+    private fun processRow(row: Map<String, String>) {
+        val identity = row["Identity"] ?: ""
+        val clevertapId = row["CleverTap Id"] ?: ""
+        if (identity.isEmpty()) {
+            if (clevertapId.isEmpty()) {
+                log.info { "preserve profile: $row" }
+            } else {
+                val status = client.deleteProfile(listOf(clevertapId), "guid")
+                log.info { "delete profile: $row -> status: $status" }
+                TimeUnit.SECONDS.sleep(1)
             }
+        } else {
+            if (identity.contains(",")) {
+                val profiles = identity.split(",").mapNotNull { s -> s.trim() }
+                val status = client.demergeProfile(profiles)
+                log.info { "demerge profiles: $row -> status: $status" }
+                TimeUnit.SECONDS.sleep(1)
+            } else if(!Util.isValidIdentity(identity)) {
+                val status = client.deleteProfile(listOf(identity))
+                log.info { "delete profile: $row -> status: $status" }
+                TimeUnit.SECONDS.sleep(1)
+            } else {
+                log.info { "preserve profile: $row" }
+            }
+        }
     }
 }
